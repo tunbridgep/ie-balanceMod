@@ -1,0 +1,9 @@
+/////////////////===== Disable Saving =====\\\\\\\\\\\\\\\\\
+
+//Disable Resting and Saving in Areas
+COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
+	WRITE_BYTE 0x14 (THIS | BIT0) // add 'no saving' bit to all alreas
+BUT_ONLY
+
+//SetPrivateProfileString('Script','IntervalSaveEnabled','1')
+//SetPrivateProfileString('Script','IntervalSaveCombat','0')

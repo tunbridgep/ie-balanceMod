@@ -1,0 +1,33 @@
+/////////////////===== Setup Resting Overhaul =====\\\\\\\\\\\\\\\\\
+
+/*
+//Disable Resting and Saving in Areas
+//DISABLED: This is now done via script
+COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
+	WRITE_BYTE 0x14 (THIS | BIT5) // add 'no resting' bit to all alreas
+	WRITE_BYTE 0x14 (THIS | BIT0) // add 'no saving' bit to all alreas
+	//WRITE_BYTE 0x14 (THIS | BIT7) // add 'no resting' bit to all alreas
+BUT_ONLY
+*/
+
+//Add script to force use of supply items
+EXTEND_TOP ~baldur.bcs~ ~balanceMod/components/resting/restscript.baf~
+
+//Add Camping Supplies Item
+COPY_EXISTING ~balanceMod/components/resting/ICAMPSP.BAM~ ~override~
+COPY_EXISTING ~balanceMod/components/resting/GCAMPSP.BAM~ ~override~
+COPY_EXISTING ~balanceMod/components/resting/CAMPSUPP.ITM~ ~override~
+	SAY NAME1 ~Camping Supplies~
+	SAY NAME2 ~Camping Supplies~
+	SAY DESC ~Test Item~
+	SAY UNIDENTIFIED_DESC ~Test Item~
+	
+//Add to Stores
+
+//Gerth's Equipment Shop - Kuldahar
+COPY_EXISTING ~kugerth.sto~ ~override~
+  ADD_STORE_ITEM ~campsupp~ LAST #0 #0 #0 ~IDENTIFIED~ #1 ~UNLIMITED~
+  
+//Pomab's Emporium - Easthaven
+COPY_EXISTING ~ehpomab.sto~ ~override~
+  ADD_STORE_ITEM ~campsupp~ LAST #0 #0 #0 ~IDENTIFIED~ #1 ~UNLIMITED~

@@ -1,0 +1,3 @@
+/////////////////===== Setup Town Portal Spell =====\\\\\\\\\\\\\\\\\
+
+//ADD_SPELL ~balanceMod/components/townportal.spl~ ~4~ ~1~ ~Town Portal Spell~
