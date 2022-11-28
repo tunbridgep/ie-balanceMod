@@ -20,14 +20,16 @@ COPY_EXISTING ~balanceMod/components/resting/CAMPSUPP.ITM~ ~override~
 	SAY NAME1 ~Camping Supplies~
 	SAY NAME2 ~Camping Supplies~
 	SAY DESC ~Test Item~
+	//SAY PRICE 100
 	SAY UNIDENTIFIED_DESC ~Test Item~
-	
+    WRITE_LONG 0x34 100 // set price to 100 gp
+
 //Add to Stores
 
 //Gerth's Equipment Shop - Kuldahar
 COPY_EXISTING ~kugerth.sto~ ~override~
-  ADD_STORE_ITEM ~campsupp~ LAST #0 #0 #0 ~IDENTIFIED~ #1 ~UNLIMITED~
+	ADD_STORE_ITEM ~campsupp~ LAST #0 #0 #0 ~IDENTIFIED~ #1 ~UNLIMITED~
   
 //Pomab's Emporium - Easthaven
 COPY_EXISTING ~ehpomab.sto~ ~override~
-  ADD_STORE_ITEM ~campsupp~ LAST #0 #0 #0 ~IDENTIFIED~ #1 ~UNLIMITED~
+	ADD_STORE_ITEM ~campsupp~ LAST #0 #0 #0 ~IDENTIFIED~ #1 ~UNLIMITED~
