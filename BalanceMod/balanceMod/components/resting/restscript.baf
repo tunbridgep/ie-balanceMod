@@ -5,7 +5,7 @@ IF
 THEN
 	RESPONSE #100
 		RemoveAreaFlag(NOREST)
-		DisplayStringNoName(Myself,~Enabling Rest~)
+		//DisplayStringNoName(Myself,~Enabling Rest~)
 		SetGlobal("balanceMod_RestDisabled","MYAREA",0)
 		
 		//Disable Encounters
@@ -22,7 +22,7 @@ THEN
 	RESPONSE #100
 		//AddAreaFlag(NOSAVE)
 		AddAreaFlag(NOREST)
-		DisplayStringNoName(Myself,~Disabling Rest~)
+		//DisplayStringNoName(Myself,~Disabling Rest~)
 		SetGlobal("balanceMod_RestDisabled","MYAREA",1)
 		
 		//Disable Encounters
@@ -36,7 +36,7 @@ IF
 	PartyRested()
 THEN
 	RESPONSE #100
-		DisplayStringNoName(Myself,~WE JUST RESTED~)
+		//DisplayStringNoName(Myself,~WE JUST RESTED~)
 		TakePartyItemNum("CAMPSUPP",1) //DONT use TakePartyItem, it takes an entire stack
 		Continue()
 END
