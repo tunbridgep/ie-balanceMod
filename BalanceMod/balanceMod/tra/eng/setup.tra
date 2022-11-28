@@ -1,6 +1,10 @@
-@24 = ~This component is incompatible with another mod already installed.~
-@25 = ~This component is not available for your game.~
+@24		= ~This component is incompatible with another mod already installed.~
+@25		= ~This component is not available for your game.~
 
 @1018	= ~Resting Overhaul~
+
+@26		= ~Camping Supplies~
+@27		= ~A Collection of firewood, tinder, and other supplies for weary adventurers. Camping Supplies allow a degree of comfort and safety while camping, and are needed to get a good night sleep, but are disposable.~
+
 @1019	= ~Disable Free Saving~
 @1020	= ~Town Portal Spell~

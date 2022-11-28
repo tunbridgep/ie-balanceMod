@@ -5,13 +5,12 @@ IF
 THEN
 	RESPONSE #100
 		RemoveAreaFlag(NOREST)
-		//DisplayStringNoName(Myself,~Enabling Rest~)
+		DisplayStringNoName(Myself,~Enabling Rest~)
 		SetGlobal("balanceMod_RestDisabled","MYAREA",0)
 		
 		//Disable Encounters
-		SetRestEncounterProbabilityDay(0)
-		SetRestEncounterProbabilityNight(0)
-		Continue()
+		//SetRestEncounterProbabilityDay(0)
+		//SetRestEncounterProbabilityNight(0)
 END
 
 //Disable Rest if we don't have any camping supplies
@@ -20,23 +19,25 @@ IF
 	!PartyHasItem("CAMPSUPP")
 THEN
 	RESPONSE #100
-		//AddAreaFlag(NOSAVE)
 		AddAreaFlag(NOREST)
-		//DisplayStringNoName(Myself,~Disabling Rest~)
+		DisplayStringNoName(Myself,~Disabling Rest~)
 		SetGlobal("balanceMod_RestDisabled","MYAREA",1)
 		
 		//Disable Encounters
-		SetRestEncounterProbabilityDay(0)
-		SetRestEncounterProbabilityNight(0)
-		Continue()
+		//SetRestEncounterProbabilityDay(0)
+		//SetRestEncounterProbabilityNight(0)
 END
 
 //Remove camping supplies when we rest
 IF
 	PartyRested()
+	//Don't remove if we rest in inns
+	OR(2)
+		AreaType(OUTDOOR)
+		AreaType(DUNGEON)
 THEN
 	RESPONSE #100
-		//DisplayStringNoName(Myself,~WE JUST RESTED~)
+		DisplayStringNoName(Myself,~Camping Supplies Used~)
 		TakePartyItemNum("CAMPSUPP",1) //DONT use TakePartyItem, it takes an entire stack
 		Continue()
 END

@@ -1,15 +1,19 @@
 Town Portal spell:
 - Given to PC
 - Once per rest
-- Can't cheat because offset by increased inn prices
+- Cannot be used in combat (or, alternatively, long casting time)
+- Can't rest cheat because offset by increased inn prices, it's purely a convenience thing.
 
-Increased Inn Prices:
-- All inn prices increased by 100 times.
-- Healing effect of Rest is increased by 40 times
-
-Camping Overhaul:
-- Normal rests are now "Short Rests", which only recharge utility spells (identify, knock, etc), and has a small chance of ambush. No healing.
-- "Long Rests" now require "Camping Supplies", which can be bought for 200 gold each
-- "Long Rests" are always safe
+Resting Overhaul:
+- Resting now require "Camping Supplies", which can be bought for 200 gold each
+- Resting is always safe
 - Characters gain a bonus upon long-resting, depending on their kit
 - The bonus is permanent until the next rest
+- Inn Prices significantly increased, but still cheaper than camping supplies
+
+Potion Overhaul:
+- Healing potions heal over time
+
+Spell Overhaul:
+- Goodberries made much better, to compete with the healing spells
+	- Heal 90% of the healing spells, but the cleric doesn't need to put themselves in harms way to do the healing.

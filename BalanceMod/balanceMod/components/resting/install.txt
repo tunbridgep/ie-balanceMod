@@ -1,8 +1,8 @@
 /////////////////===== Setup Resting Overhaul =====\\\\\\\\\\\\\\\\\
 
 /*
-//Disable Resting and Saving in Areas
-//DISABLED: This is now done via script
+////Disable Resting and Saving in Areas
+////DISABLED: This is now done via script
 COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
 	WRITE_BYTE 0x14 (THIS | BIT5) // add 'no resting' bit to all alreas
 	WRITE_BYTE 0x14 (THIS | BIT0) // add 'no saving' bit to all alreas
@@ -10,22 +10,36 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
 BUT_ONLY
 */
 
-//Add script to force use of supply items
+////Add script to force use of supply items
 EXTEND_TOP ~baldur.bcs~ ~balanceMod/components/resting/restscript.baf~
 
-//Add Camping Supplies Item
+////Remove Encounters from All Areas
+COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
+	READ_LONG 0x0c0 rest_off
+	WRITE_LONG rest_off + 0xa4 0 // make inactive, set max creatures to 0, and
+	WRITE_LONG rest_off + 0xa8 0 // drop probabilities to zero for good measure
+
+////Add Camping Supplies Item
 COPY_EXISTING ~balanceMod/components/resting/ICAMPSP.BAM~ ~override~
 COPY_EXISTING ~balanceMod/components/resting/GCAMPSP.BAM~ ~override~
 COPY_EXISTING ~balanceMod/components/resting/CAMPSUPP.ITM~ ~override~
-	SAY NAME1 ~Camping Supplies~
-	SAY NAME2 ~Camping Supplies~
-	SAY DESC ~Test Item~
-	//SAY PRICE 100
-	SAY UNIDENTIFIED_DESC ~Test Item~
-    WRITE_LONG 0x34 100 // set price to 100 gp
+	SAY NAME1 @26
+	SAY NAME2 @26
+	SAY DESC @27
+	SAY UNIDENTIFIED_DESC @27
+    //WRITE_LONG 0x34 150 // set price to 150 gp
+    WRITE_LONG 0x34 200 // set price to 1 gp
 
-//Add to Stores
+////Add to Stores
+COPY_EXISTING_REGEXP GLOB ~^.+\.sto$~ ~override~
+	READ_SHORT  0x08 "type" ELSE 0
+	PATCH_IF (type == 0)
+		BEGIN
+			ADD_STORE_ITEM ~campsupp~ LAST #0 #0 #0 ~IDENTIFIED~ #1 ~UNLIMITED~
+		END
+BUT_ONLY
 
+/*
 //Gerth's Equipment Shop - Kuldahar
 COPY_EXISTING ~kugerth.sto~ ~override~
 	ADD_STORE_ITEM ~campsupp~ LAST #0 #0 #0 ~IDENTIFIED~ #1 ~UNLIMITED~
@@ -33,3 +47,22 @@ COPY_EXISTING ~kugerth.sto~ ~override~
 //Pomab's Emporium - Easthaven
 COPY_EXISTING ~ehpomab.sto~ ~override~
 	ADD_STORE_ITEM ~campsupp~ LAST #0 #0 #0 ~IDENTIFIED~ #1 ~UNLIMITED~
+*/
+
+////Increase Prices for Inn
+//Inn gives a lot of benefits, since you regain spell slots, so realistically
+//it should cost more than temple services, but less than portable camping supplies,
+//since it's less convenient
+COPY_EXISTING_REGEXP GLOB ~^.+\.sto$~ ~override~
+	READ_SHORT  0x08 "type" ELSE 0
+	PATCH_IF ((type == 2))
+		BEGIN
+			READ_SHORT  0x60 "peasantPrice" ELSE 0
+			READ_SHORT  0x64 "merchantPrice" ELSE 0
+			READ_SHORT  0x68 "noblePrice" ELSE 0
+			READ_SHORT  0x5c "roomFlags" ELSE 0
+			WRITE_LONG 0x60 (peasantPrice * 65) //multiply price
+			WRITE_LONG 0x64 (merchantPrice * 65) //multiply price
+			WRITE_LONG 0x68 (noblePrice * 65) //multiply price
+		END
+BUT_ONLY

@@ -1,9 +1,15 @@
 /////////////////===== Disable Saving =====\\\\\\\\\\\\\\\\\
 
-//Disable Resting and Saving in Areas
+/*
+//Disable Saving in Areas
+//DISABLED: This also completely disables resting
 COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
 	WRITE_BYTE 0x14 (THIS | BIT0) // add 'no saving' bit to all alreas
 BUT_ONLY
+*/
+
+////Add saving script
+EXTEND_TOP ~baldur.bcs~ ~balanceMod/components/disablesaving/savescript.baf~
 
 //SetPrivateProfileString('Script','IntervalSaveEnabled','1')
 //SetPrivateProfileString('Script','IntervalSaveCombat','0')

@@ -25,9 +25,10 @@ BEGIN @1018
 REQUIRE_PREDICATE GAME_IS ~iwdee~ @25
 INCLUDE ~balanceMod/components/resting/install.txt~
 
-BEGIN @1019
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @25
-INCLUDE ~balanceMod/components/disablesaving/install.txt~
+////CURRENTLY BROKEN
+//BEGIN @1019
+//REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @25
+//INCLUDE ~balanceMod/components/disablesaving/install.txt~
 
 //BEGIN @1019
 //INCLUDE ~balanceMod/components/townportal/install.txt~

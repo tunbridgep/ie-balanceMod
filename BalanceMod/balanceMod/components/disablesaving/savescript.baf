@@ -1,0 +1,28 @@
+//Disable Saving Completely
+IF
+	Global("balanceMod_SaveDisabled","MYAREA",0)
+	//Don't prevent saving in inns
+	//OR(2)
+	//	AreaType(OUTDOOR)
+	//	AreaType(DUNGEON)
+THEN
+	RESPONSE #100
+		DisplayStringNoName(Myself,~Disable Saving~)
+		SetGlobal("balanceMod_SaveDisabled","MYAREA",1)
+		AddAreaFlag(NOSAVE)
+		Continue()
+END
+
+//Enable Saving if in Dialogue (so we can stil use inns)
+IF
+	OR(2)
+		IsGabber(Myself)
+		InteractingWith(Myself)
+	!Global("balanceMod_SaveDisabled","MYAREA",0)
+THEN
+	RESPONSE #100
+		DisplayStringNoName(Myself,~Enable Saving~)
+		SetGlobal("balanceMod_SaveDisabled","MYAREA",0)
+		RemoveAreaFlag(NOSAVE)
+		Continue()
+END
