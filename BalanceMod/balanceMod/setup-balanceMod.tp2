@@ -21,8 +21,7 @@ END
 LANGUAGE ~English~ ~english~ ~balanceMod/tra/eng/setup.tra~
 
 BEGIN @1018
-//REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @25
-REQUIRE_PREDICATE GAME_IS ~iwdee~ @25
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @25
 INCLUDE ~balanceMod/components/resting/install.txt~
 
 ////CURRENTLY BROKEN
