@@ -6,5 +6,14 @@
 @26		= ~Camping Supplies~
 @27		= ~A Collection of firewood, tinder, and other supplies for weary adventurers. Camping Supplies allow a degree of comfort and safety while camping, and are needed to get a good night sleep, but are disposable.~
 
+@28		= ~Potion of Fatigue Restoration~
+@29		= ~When wholly consumed, this potion rejuvenates and reinvigorates the person. The effect is instantaneous, and the potion is destroyed in the process. 
+
+STATISTICS:
+
+Special: Removes Fatigue
+
+Weight: 1~
+
 @1019	= ~Disable Free Saving~
 @1020	= ~Town Portal Spell~
