@@ -60,9 +60,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.sto$~ ~override~
 			READ_SHORT  0x60 "peasantPrice" ELSE 0
 			READ_SHORT  0x64 "merchantPrice" ELSE 0
 			READ_SHORT  0x68 "noblePrice" ELSE 0
+			READ_SHORT  0x6c "royalPrice" ELSE 0
 			READ_SHORT  0x5c "roomFlags" ELSE 0
-			WRITE_LONG 0x60 (peasantPrice * 65) //multiply price
-			WRITE_LONG 0x64 (merchantPrice * 65) //multiply price
-			WRITE_LONG 0x68 (noblePrice * 65) //multiply price
+			WRITE_LONG 0x60 (peasantPrice * 40) //multiply price
+			WRITE_LONG 0x64 (peasantPrice * 42) //multiply price
+			WRITE_LONG 0x68 (peasantPrice * 44) //multiply price
+			WRITE_LONG 0x68 (peasantPrice * 46) //multiply price
 		END
 BUT_ONLY
