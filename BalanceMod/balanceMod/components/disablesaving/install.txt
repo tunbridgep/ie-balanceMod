@@ -9,7 +9,7 @@ BUT_ONLY
 */
 
 ////Add saving script
-EXTEND_TOP ~baldur.bcs~ ~balanceMod/components/disablesaving/savescript.baf~
+EXTEND_TOP ~baldur.bcs~ ~%MOD_FOLDER%/components/disablesaving/savescript.baf~
 
 //SetPrivateProfileString('Script','IntervalSaveEnabled','1')
 //SetPrivateProfileString('Script','IntervalSaveCombat','0')

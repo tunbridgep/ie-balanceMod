@@ -11,7 +11,7 @@ BUT_ONLY
 */
 
 ////Add script to force use of supply items
-EXTEND_TOP ~baldur.bcs~ ~balanceMod/components/resting/restscript.baf~
+EXTEND_TOP ~baldur.bcs~ ~%MOD_FOLDER%/components/resting/restscript.baf~
 
 ////Remove Encounters from All Areas
 COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
@@ -20,9 +20,9 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
 	WRITE_LONG rest_off + 0xa8 0 // drop probabilities to zero for good measure
 
 ////Add Camping Supplies Item
-COPY_EXISTING ~balanceMod/components/resting/ICAMPSP.BAM~ ~override~
-COPY_EXISTING ~balanceMod/components/resting/GCAMPSP.BAM~ ~override~
-COPY_EXISTING ~balanceMod/components/resting/CAMPSUPP.ITM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/resting/ICAMPSP.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/resting/GCAMPSP.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/resting/CAMPSUPP.ITM~ ~override~
 	SAY NAME1 @26
 	SAY NAME2 @26
 	SAY DESC @27
@@ -44,10 +44,10 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.sto$~ ~override~
 BUT_ONLY
 
 ////Add Fatigue Potion
-COPY_EXISTING ~balanceMod/components/resting/IPOTFAT.BAM~ ~override~
-COPY_EXISTING ~balanceMod/components/resting/GPOTFAT.BAM~ ~override~
-COPY_EXISTING ~balanceMod/components/resting/CPOTFAT.BAM~ ~override~
-COPY_EXISTING ~balanceMod/components/resting/POTFAT.ITM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/resting/IPOTFAT.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/resting/GPOTFAT.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/resting/CPOTFAT.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/resting/POTFAT.ITM~ ~override~
 	//SAY NAME1 @28
 	SAY NAME2 @28
 	SAY DESC @29
