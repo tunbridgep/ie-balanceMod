@@ -48,10 +48,10 @@ COPY_EXISTING ~balanceMod/components/resting/IPOTFAT.BAM~ ~override~
 COPY_EXISTING ~balanceMod/components/resting/GPOTFAT.BAM~ ~override~
 COPY_EXISTING ~balanceMod/components/resting/CPOTFAT.BAM~ ~override~
 COPY_EXISTING ~balanceMod/components/resting/POTFAT.ITM~ ~override~
-	SAY NAME1 @28
+	//SAY NAME1 @28
 	SAY NAME2 @28
 	SAY DESC @29
-	SAY UNIDENTIFIED_DESC @29
+	//SAY UNIDENTIFIED_DESC @29
     WRITE_LONG 0x34 5 // set price to 5 gp
     WRITE_SHORT 0x38 10 // set Stack Size to 10
 
@@ -90,6 +90,6 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.sto$~ ~override~
 			WRITE_LONG 0x60 (peasantPrice * 40) //multiply price
 			WRITE_LONG 0x64 (peasantPrice * 42) //multiply price
 			WRITE_LONG 0x68 (peasantPrice * 44) //multiply price
-			WRITE_LONG 0x68 (peasantPrice * 46) //multiply price
+			WRITE_LONG 0x6c (peasantPrice * 46) //multiply price
 		END
 BUT_ONLY
