@@ -1,0 +1,10 @@
+/////////////////===== Reduce Gold Amounts =====\\\\\\\\\\\\\\\\\
+
+////Remove Gold from All Creatures
+COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
+	READ_LONG 0x1c gd //Gold
+	PATCH_IF gd > 3
+		BEGIN
+			WRITE_LONG 0x1c gd / gold_divide_amount
+		END
+BUT_ONLY

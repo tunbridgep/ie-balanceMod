@@ -52,7 +52,7 @@ COPY_EXISTING ~%MOD_FOLDER%/components/resting/POTFAT.ITM~ ~override~
 	SAY NAME2 @28
 	SAY DESC @29
 	//SAY UNIDENTIFIED_DESC @29
-    WRITE_LONG 0x34 5 // set price to 5 gp
+    WRITE_LONG 0x34 35 // set price to 35 gp
     WRITE_SHORT 0x38 10 // set Stack Size to 10
 
 ////Add to Stores
