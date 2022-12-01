@@ -2,9 +2,18 @@
 
 ////Remove Gold from All Creatures
 COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
-	READ_LONG 0x1c gd //Gold
+	SET type_offset = 0x271 //Creature Type, called "General" in Near Infinity
+	SET gold_offset = 0x1c //Gold offset
+	SET humanoidID = IDS_OF_SYMBOL ("GENERAL" "humanoid")
+	SET type = BYTE_AT 0x271
+	
+	READ_LONG gold_offset gd //Gold
 	PATCH_IF gd > 3
 		BEGIN
-			WRITE_LONG 0x1c gd / gold_divide_amount
+			WRITE_LONG gold_offset (gd / gold_divide_amount)
+		END
+	PATCH_IF type != humanoidID AND human_only
+		BEGIN
+			WRITE_LONG gold_offset 0
 		END
 BUT_ONLY
