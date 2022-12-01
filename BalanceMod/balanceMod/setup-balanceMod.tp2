@@ -41,6 +41,7 @@ OUTER_SET gold_divide_amount = 3
 OUTER_SET human_only = 0
 INCLUDE ~%MOD_FOLDER%/components/lessgold/install.txt~
 
+/*
 BEGIN @10213 //Half, Human Only
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @1000
 SUBCOMPONENT @1021
@@ -54,6 +55,7 @@ SUBCOMPONENT @1021
 OUTER_SET gold_divide_amount = 3
 OUTER_SET human_only = 1
 INCLUDE ~%MOD_FOLDER%/components/lessgold/install.txt~
+*/
 
 ////Add IWD Bard Songs
 

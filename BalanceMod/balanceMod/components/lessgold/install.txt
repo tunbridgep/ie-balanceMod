@@ -2,18 +2,59 @@
 
 ////Remove Gold from All Creatures
 COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
-	SET type_offset = 0x271 //Creature Type, called "General" in Near Infinity
+	//SET type_offset = 0x271 //Creature Type, called "General" in Near Infinity
 	SET gold_offset = 0x1c //Gold offset
 	SET humanoidID = IDS_OF_SYMBOL ("GENERAL" "humanoid")
-	SET type = BYTE_AT 0x271
+	//SET type = BYTE_AT 0x271
 	
 	READ_LONG gold_offset gd //Gold
-	PATCH_IF gd > 3
+	PATCH_IF gd > 0
 		BEGIN
 			WRITE_LONG gold_offset (gd / gold_divide_amount)
 		END
-	PATCH_IF type != humanoidID AND human_only
+	//PATCH_IF type != humanoidID AND human_only
+	//	BEGIN
+	//		WRITE_LONG gold_offset 0
+	//	END
+BUT_ONLY
+
+//Add a new Random Drop for creatures, and reduce all the standard drops by the required amount
+//This is HORRIBLE code!
+COPY_EXISTING ~rndtreas.2da~ ~override~
+	COUNT_2DA_ROWS 20 total_rows
+	FOR (row=0; row < total_rows; row += 1)
 		BEGIN
-			WRITE_LONG gold_offset 0
+			FOR (col=0; col < 20; col += 1)
+				BEGIN
+					READ_2DA_ENTRY row 0 20 name
+					READ_2DA_ENTRY row col 20 val
+					PATCH_IF (~%name%~ STRING_EQUAL "POOR")
+						OR (~%name%~ STRING_EQUAL "AVERAGE")
+						OR (~%name%~ STRING_EQUAL "WELL_OFF")
+						OR (~%name%~ STRING_EQUAL "WEALTHY")
+						OR (~%name%~ STRING_EQUAL "RICH")
+						BEGIN
+							FOR (num = 0; num < 999; num += 1)
+								BEGIN
+									PATCH_IF num < 10
+										BEGIN
+											SPRINT prefix ~00~
+										END
+									PATCH_IF num >= 10 AND num < 100
+										BEGIN
+											SPRINT prefix ~0~
+										END
+									PATCH_IF num >= 100
+										BEGIN
+											SPRINT prefix ~~
+										END
+									PATCH_IF ~%val%~ STRING_EQUAL ~%prefix%%num%~
+										BEGIN
+											SET newgold = num / gold_divide_amount
+											SET_2DA_ENTRY row col 20 ~%prefix%%newgold%~
+										END
+								END
+						END
+				END
 		END
 BUT_ONLY

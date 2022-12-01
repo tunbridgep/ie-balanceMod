@@ -39,10 +39,10 @@ Weight: 1~
 All allies within 30 ft. gain +1 to hit, +1 to damage, and +1 to all their Saving Throws.~
 
 @33		= ~The Tale of Curran Strongheart~
-@34		= ~The Tale of Curran Strongheart—Immunity to Fear~
+@34		= ~The Tale of Curran Strongheart—Immunity to Fear and Morale Recovery~
 @35		= ~"The Tale of Curran Strongheart"
 
-All allies within 30 ft. gain immunity to fear effects for as long as the song lasts, and any fear effects currently on them are removed.~
+All allies within 30 ft. slowly recover morale, as well as gaining immunity to fear effects for as long as the song lasts, and any fear effects currently on them are removed.~
 
 @36		= ~Tymora's Melody~
 @37		= ~Tymora's Melody—Luck and Skill Bonuses~
