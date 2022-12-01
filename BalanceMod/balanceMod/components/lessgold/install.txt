@@ -18,7 +18,48 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
 	//	END
 BUT_ONLY
 
-//Add a new Random Drop for creatures, and reduce all the standard drops by the required amount
+////Remove Gold from All Containers
+//COPY_EXISTING ~AR3300.are~ ~override~
+COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
+	READ_LONG 0x78 items_offset
+	SET items_size = 20
+	
+	//Get Containers
+	GET_OFFSET_ARRAY container_array ARE_V10_CONTAINERS
+	PHP_EACH container_array AS int => container_offset
+	BEGIN
+		SET items_count_offset = container_offset + 0x44
+		SET first_item_index = container_offset + 0x40
+		SET container_type_offset = container_offset + 0x24
+		SET container_flags_offset = container_offset + 0x28
+		
+		READ_ASCII container_offset container_name
+		READ_LONG items_count_offset item_count
+		READ_LONG first_item_index index
+		READ_SHORT container_type_offset container_type
+		READ_LONG container_flags_offset container_flags
+		SET locked = (container_flags & BIT0) OR (container_flags & BIT2)
+		
+		PATCH_IF (!locked)
+		BEGIN
+			//PATCH_PRINT ~%container_name% of type %container_type% has %item_count% items starting at %index% and lock state is %locked%~
+			FOR (item = index; item < (index + item_count); item += 1)
+			BEGIN
+				SET item_offset = items_offset + (items_size * index)
+				READ_ASCII (item_offset + 0x00) item_name
+				READ_SHORT (item_offset + 0x0a) item_quantity
+				//PATCH_PRINT ~%item_quantity%: %item_name%~
+				PATCH_IF ~%item_name%~ STRING_EQUAL ~MISC07~ AND item_quantity > 0
+				BEGIN
+					//PATCH_PRINT ~updating gold value...~
+					WRITE_SHORT (item_offset + 0x0a) (item_quantity / gold_divide_amount)
+				END
+			END
+		END
+	END
+BUT_ONLY
+
+//Reduce all the standard drops by the required amount
 //This is HORRIBLE code!
 COPY_EXISTING ~rndtreas.2da~ ~override~
 	COUNT_2DA_ROWS 20 total_rows

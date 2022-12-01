@@ -7,11 +7,11 @@
 
 @1020	= ~Town Portal Spell~
 
-@1021	= ~Reduce Enemy Gold~
-@10211	= ~Reduce Enemy Gold by Half~
-@10212	= ~Reduce Enemy Gold by Two Thirds~
-@10213	= ~Reduce Enemy Gold by Half, only Humanoids have gold~
-@10214	= ~Reduce Enemy Gold by Two Thirds, only Humanoids have gold~
+@1021	= ~Reduce Gold Found~
+@10211	= ~Reduce Gold by Half~
+@10212	= ~Reduce Gold by Two Thirds~
+@10213	= ~Reduce Gold by Half, only Humanoids have gold~
+@10214	= ~Reduce Gold by Two Thirds, only Humanoids have gold~
 
 @1022	= ~Add Icewind Dale Bard Songs~
 
