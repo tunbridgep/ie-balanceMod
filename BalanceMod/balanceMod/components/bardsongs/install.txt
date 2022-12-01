@@ -1,0 +1,172 @@
+/////////////////===== Add Additional Bard Songs =====\\\\\\\\\\\\\\\\\
+
+////Copy over Bard song spells...
+
+//Visual Range of Caster, Party Only projectile
+ADD_PROJECTILE ~%MOD_FOLDER%/components/bardsongs/ohvrpo.PRO~
+
+//Add Portrait Icons
+//This absolutely fucking sucks, but the WeiDU readme is absolute shit and refuses to make anything even remotely straightfoward
+//It was obviously written by an engineer
+//Anyway, something as simple as getting the reference for an existing string in my TRA file is a fucking chore
+//and according to the useless weidu readme, which I have scoured top to bottom, it's fucking impossible to do.
+//So now everyone gets shitty English strings. Honestly, I don't fucking care anymore. If people want this shit to work,
+//maybe WeiDU should be designed properly and not be an archaic and overly complicated piece of hot garbage.
+COPY_EXISTING ~statdesc.2da~ ~override~
+	COUNT_2DA_ROWS 3 total_states
+	SET balladSlot = total_states
+	SET curranSlot = total_states + 1
+	SET tymoraSlot = total_states + 2
+	SET kaudiesSlot = total_states + 3
+	SET sirenSlot = total_states + 4
+	SET sithSlot = total_states + 5
+	
+	SET strref1 = (RESOLVE_STR_REF ("The Ballad of Three Heroes"))
+	SET strref2 = (RESOLVE_STR_REF ("The Tale of Curran Strongheart"))
+	SET strref3 = (RESOLVE_STR_REF ("Tymora's Melody"))
+	SET strref4 = (RESOLVE_STR_REF ("The Song of Kaudies"))
+	SET strref5 = (RESOLVE_STR_REF ("The Siren's Yearning"))
+	SET strref6 = (RESOLVE_STR_REF ("War Chant of Sith"))
+	
+	INSERT_2DA_ROW balladSlot 3 ~%balladSlot% %strref1% NOTE~
+	INSERT_2DA_ROW curranSlot 3 ~%curranSlot% %strref2% NOTE~
+	INSERT_2DA_ROW tymoraSlot 3 ~%tymoraSlot% %strref3% NOTE~
+	INSERT_2DA_ROW kaudiesSlot 3 ~%kaudiesSlot% %strref4% NOTE~
+	INSERT_2DA_ROW sirenSlot 3 ~%sirenSlot% %strref5% NOTE~
+	INSERT_2DA_ROW sithSlot 3 ~%sithSlot% %strref6% NOTE~
+BUT_ONLY
+
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/note.bam~ ~override~
+
+//Songs
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/#BARD-1.SPL~ ~override~
+//ADD_SPELL ~%MOD_FOLDER%/components/bardsongs/#BARD1.SPL~ 4 1 BARD_SONG_BALLAD
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/#BARD1.SPL~ ~override~
+	SAY NAME1 @30
+	SAY 0x50 @32
+//ADD_SPELL ~%MOD_FOLDER%/components/bardsongs/#BARD2.SPL~ 4 1 BARD_SONG_CURRAN
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/#BARD2.SPL~ ~override~
+	SAY NAME1 @33
+	SAY 0x50 @35
+//ADD_SPELL ~%MOD_FOLDER%/components/bardsongs/#BARD3.SPL~ 4 1 BARD_SONG_TYMORA
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/#BARD3.SPL~ ~override~
+	SAY NAME1 @36
+	SAY 0x50 @38
+//ADD_SPELL ~%MOD_FOLDER%/components/bardsongs/#BARD4.SPL~ 4 1 BARD_SONG_KAUDIES
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/#BARD4.SPL~ ~override~
+	SAY NAME1 @39
+	SAY 0x50 @41
+//ADD_SPELL ~%MOD_FOLDER%/components/bardsongs/#BARD5.SPL~ 4 1 BARD_SONG_SIREN
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/#BARD5.SPL~ ~override~
+	SAY NAME1 @42
+	SAY 0x50 @44
+//ADD_SPELL ~%MOD_FOLDER%/components/bardsongs/#BARD6.SPL~ 4 1 BARD_SONG_SITH
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/#BARD6.SPL~ ~override~
+	SAY NAME1 @45
+	SAY 0x50 @47	
+
+//Added Abilities from Songs
+//We need to make them use the party projectile
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/SPCL115.SPL~ ~override~ //Curran
+	SAY NAME1 @34
+	LPF ALTER_SPELL_HEADER
+        INT_VAR
+        header = 1
+		projectile = ~%ohvrpo%~
+	END
+	LPF ALTER_SPELL_EFFECT
+		INT_VAR
+			match_opcode = 142
+			parameter2 = %curranSlot%
+	END
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/SPCL116.SPL~ ~override~ //Tymora
+	SAY NAME1 @37
+	LPF ALTER_SPELL_HEADER
+        INT_VAR
+        header = 1
+		projectile = ~%ohvrpo%~
+	END
+	LPF ALTER_SPELL_EFFECT
+		INT_VAR
+			match_opcode = 142
+			parameter2 = %tymoraSlot%
+	END
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/SPCL117.SPL~ ~override~ //Kaudies
+	SAY NAME1 @40
+	LPF ALTER_SPELL_HEADER
+        INT_VAR
+        header = 1
+		projectile = ~%ohvrpo%~
+	END
+	LPF ALTER_SPELL_EFFECT
+		INT_VAR
+			match_opcode = 142
+			parameter2 = %kaudiesSlot%
+	END
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/SPCL118.SPL~ ~override~ //Siren
+	SAY NAME1 @43
+	LPF ALTER_SPELL_HEADER
+        INT_VAR
+        header = 1
+		projectile = ~%ohvrpo%~
+	END
+	LPF ALTER_SPELL_EFFECT
+		INT_VAR
+			match_opcode = 142
+			parameter2 = %sirenSlot%
+	END
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/SPCL119.SPL~ ~override~ //Sith
+	SAY NAME1 @46
+	LPF ALTER_SPELL_HEADER
+        INT_VAR
+        header = 1
+		projectile = ~%ohvrpo%~
+	END
+	LPF ALTER_SPELL_EFFECT
+		INT_VAR
+			match_opcode = 142
+			parameter2 = %sithSlot%
+	END
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/SPCL120.SPL~ ~override~ //Ballad
+	SAY NAME1 @31
+	LPF ALTER_SPELL_HEADER
+        INT_VAR
+			header = 1
+			projectile = ~%ohvrpo%~
+	END
+	LPF ALTER_SPELL_EFFECT
+		INT_VAR
+			match_opcode = 142
+			parameter2 = %balladSlot%
+	END
+
+//...And Artwork
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/BARD1.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/BARD1B.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/BARD2.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/BARD2B.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/BARD3.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/BARD3B.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/BARD4.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/BARD4B.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/BARD5.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/BARD5B.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/BARD6.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/BARD6B.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/SPENBARA.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/SPENBARB.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/SPENBARC.BAM~ ~override~
+COPY_EXISTING ~%MOD_FOLDER%/components/bardsongs/SPENBARD.BAM~ ~override~
+
+//Add spells to bard 2DA
+COPY_EXISTING ~clabba01.2da~ ~override~
+	COUNT_2DA_COLS cols
+    READ_2DA_ENTRIES_NOW rows cols
+	SET_2DA_ENTRY 0 1 cols ~GA_#BARD1~
+	SET_2DA_ENTRY 0 3 cols ~GA_#BARD2~
+	SET_2DA_ENTRY 0 5 cols ~GA_#BARD3~
+	SET_2DA_ENTRY 0 7 cols ~GA_#BARD4~
+	SET_2DA_ENTRY 0 9 cols ~GA_#BARD5~
+	SET_2DA_ENTRY 0 11 cols ~GA_#BARD6~
+	SET_2DA_ENTRY 5 1 cols ~AP_#BARD-1~
+BUT_ONLY

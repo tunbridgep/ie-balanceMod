@@ -38,3 +38,9 @@ REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @1000
 SUBCOMPONENT @1021
 OUTER_SET gold_divide_amount = 3
 INCLUDE ~%MOD_FOLDER%/components/lessgold/install.txt~
+
+////Add IWD Bard Songs
+
+BEGIN @1022
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/bardsongs/install.txt~

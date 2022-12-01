@@ -2,11 +2,16 @@
 @1001	= ~This component is not available for your game.~
 
 @1018	= ~Resting Overhaul~
+
 @1019	= ~Disable Free Saving~
+
 @1020	= ~Town Portal Spell~
+
 @1021	= ~Reduce Enemy Gold~
 @10211	= ~Reduce Enemy Gold by Half~
 @10212	= ~Reduce Enemy Gold by Two Thirds~
+
+@1022	= ~Add Icewind Dale Bard Songs~
 
 
 ////Resting Overhaul
@@ -22,3 +27,41 @@ STATISTICS:
 Special: Removes Fatigue
 
 Weight: 1~
+
+////Bard Songs
+
+@30		= ~The Ballad of Three Heroes~
+@31		= ~The Ballad of Three Heroes—Combat Bonuses~
+@32		= ~"The Ballad of Three Heroes"
+
+All allies within 30 ft. gain +1 to hit, +1 to damage, and +1 to all their Saving Throws.~
+
+@33		= ~The Tale of Curran Strongheart~
+@34		= ~The Tale of Curran Strongheart—Immunity to Fear~
+@35		= ~"The Tale of Curran Strongheart"
+
+All allies within 30 ft. gain immunity to fear effects for as long as the song lasts, and any fear effects currently on them are removed.~
+
+@36		= ~Tymora's Melody~
+@37		= ~Tymora's Melody—Luck and Skill Bonuses~
+@38		= ~"Tymora's Melody"
+
+All allies within 30 ft. gain +1 to luck, +3 to Saving Throws, +10 to lore, and a +10% bonus to all of their thieving skills.~
+
+@39		= ~The Song of Kaudies~
+@40		= ~The Song of Kaudies—Resistant to Sound Attacks~
+@41		= ~"The Song of Kaudies"
+
+All allies within 30 ft. have a 50% chance to shrug off the effects of spells such as Silence, Shout, Great Shout, Command, Greater Command, or any other sound-based attack.~
+
+@42		= ~The Siren's Yearning~
+@43		= ~The Siren's Yearning—Enthralls Creatures~
+@44		= ~"The Siren's Yearning"
+
+All enemies within 30 ft. must save vs. Spell or become enthralled, unable to take action until 1 round passes or they take damage.~
+
+@45		= ~War Chant of Sith~
+@46		= ~War Chant of Sith—Armor Bonuses and Regeneration~
+@47		= ~"War Chant of Sith"
+
+All allies within 30 ft. gain a +2 bonus to Armor Class, +10% resistance to slashing, piercing, crushing, and missile damage, and the ability to regenerate 2 Hit Points per round.~

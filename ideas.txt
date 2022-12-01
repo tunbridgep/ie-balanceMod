@@ -41,3 +41,20 @@ Camping Overhaul:
 - Resting is always safe //Done.
 - Characters gain a bonus upon resting, depending on their kit.
 	- The bonus is permanent until the next rest or until death.
+	
+Spell Rebalance:
+
+- Summon Familiar:
+	- Familiars are not very good and are usually only used for the free HP
+	
+Solution:
+	- Summon Familiar changed to "Summon Lesser Familiar", which summons a once-off creature of little value, just an extra being to detect traps or fight for you until it dies. Doesn't matter much.
+	- Add new third level spell: "Summon Greater Familiar", which gives far more powerful familiars than the ones currently in the game.
+		- New familiar only gives HP bonus when outside of your pack, but the bonus is much larger as the familiar will have more health
+		- Permanent CON loss remains in place, but familiar can be revived at a temple for 100 gold per caster level, which reverses the loss.
+		- Can choose which familiar you wish to have.
+
+IWD Features in BG, BG features in IWD:
+
+- Morale System
+- Bard Songs from IWD. Also add bard bonus from BG as an additional song.
