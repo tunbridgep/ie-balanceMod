@@ -1,0 +1,6 @@
+////Remove Classes
+COPY_EXISTING ~clsrcreq.2da~ ~override~
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "TOTEMIC_DRUID" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "SHAPESHIFTER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "BEAST_FRIEND" END
+BUT_ONLY

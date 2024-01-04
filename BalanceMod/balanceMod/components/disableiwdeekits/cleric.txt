@@ -1,0 +1,8 @@
+////Remove Classes
+COPY_EXISTING ~clsrcreq.2da~ ~override~
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "TALOS" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "HELM" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "LATHANDER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "OHTYR" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "OHTEMPUS" END
+BUT_ONLY

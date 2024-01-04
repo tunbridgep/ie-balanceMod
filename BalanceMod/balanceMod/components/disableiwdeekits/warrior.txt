@@ -1,0 +1,8 @@
+////Remove Classes
+COPY_EXISTING ~clsrcreq.2da~ ~override~
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "BARBARIAN" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "BERSERKER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "WIZARD_SLAYER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "KENSAI" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "DWARVEN_DEFENDER" END
+BUT_ONLY

@@ -2,6 +2,11 @@ BACKUP ~balanceMod/backup~
 AUTHOR ~tunbridgep@gmail.com~
 VERSION ~0.1~
 
+////Load functions
+ALWAYS
+	INCLUDE ~%MOD_FOLDER%/lib/utils.txt~
+END
+
 README ~%MOD_FOLDER%/%LANGUAGE%/readme.txt~ ~%MOD_FOLDER%/readme.txt~
 
 LANGUAGE
@@ -62,3 +67,60 @@ INCLUDE ~%MOD_FOLDER%/components/lessgold/install.txt~
 BEGIN @1022
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/bardsongs/install.txt~
+
+////Disable IWD:EE Extra Kits
+
+BEGIN @10231
+GROUP @1023
+REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/bard.txt~
+
+BEGIN @10232
+GROUP @1023
+REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/cleric.txt~
+
+BEGIN @10233
+GROUP @1023
+REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/druid.txt~
+
+BEGIN @10234
+GROUP @1023
+REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/paladin.txt~
+
+BEGIN @10235
+GROUP @1023
+REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/warrior.txt~
+
+BEGIN @10236
+GROUP @1023
+REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/thief.txt~
+
+BEGIN @10237
+GROUP @1023
+REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/ranger.txt~
+
+BEGIN @10238
+GROUP @1023
+REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/sorceror.txt~
+
+BEGIN @10239
+GROUP @1023
+REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/shaman.txt~
+
+BEGIN @102310
+GROUP @1023
+REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/monk.txt~
+
+BEGIN @102311
+GROUP @1023
+REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/mage.txt~

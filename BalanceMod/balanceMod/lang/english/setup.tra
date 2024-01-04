@@ -1,5 +1,5 @@
-@1000	= ~This component is incompatible with another mod already installed.~
-@1001	= ~This component is not available for your game.~
+@1000	= ~This component is not available for your game.~
+@1001	= ~This component is incompatible with another mod already installed.~
 
 @1018	= ~Resting Overhaul~
 
@@ -14,6 +14,19 @@
 @10214	= ~Reduce Gold by Two Thirds, only Humanoids have gold~
 
 @1022	= ~Add Icewind Dale Bard Songs~
+
+@1023	= ~Disable IWD:EE Added Kits and Classes~
+@10231	= ~Disable IWD:EE Added Kits: Bard~
+@10232	= ~Disable IWD:EE Added Kits: Cleric~
+@10233	= ~Disable IWD:EE Added Kits: Druid~
+@10234	= ~Disable IWD:EE Added Kits: Paladin~
+@10235	= ~Disable IWD:EE Added Kits: Warrior~
+@10236	= ~Disable IWD:EE Added Kits: Thief~
+@10237	= ~Disable IWD:EE Added Kits: Ranger~
+@10238	= ~Disable IWD:EE Added Class: Sorcerer~
+@10239	= ~Disable IWD:EE Added Class: Shaman~
+@102310	= ~Disable IWD:EE Added Class: Monk~
+@102311	= ~Disable IWD:EE Added Kit: Wild Mage~
 
 
 ////Resting Overhaul

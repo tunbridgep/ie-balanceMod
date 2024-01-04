@@ -1,0 +1,6 @@
+////Remove Classes
+COPY_EXISTING ~clsrcreq.2da~ ~override~
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "MONK" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "DARK_MOON" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "SUN_SOUL" END
+BUT_ONLY

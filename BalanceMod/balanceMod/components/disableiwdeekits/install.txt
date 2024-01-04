@@ -1,0 +1,118 @@
+/////////////////===== Remove IWD:EE Kits =====\\\\\\\\\\\\\\\\\
+
+////NOW OBSOLETE!!!
+////USE the individual class versions instead
+
+/*
+////Remove All extra kits added by IWD:EE
+COPY_EXISTING ~kitlist.2da~ ~override~
+	COUNT_2DA_ROWS 9 total_rows
+	FOR (row=0; row < total_rows; ++row)
+		BEGIN
+			READ_2DA_ENTRY row 1 9 name
+			READ_2DA_ENTRY row 8 9 class
+			PATCH_IF (IS_AN_INT class) BEGIN
+				PATCH_PRINT ~row is %row%~
+				PATCH_PRINT ~name is %name%~
+				PATCH_IF (~%name%~ STRING_COMPARE_CASE "BLADE" == 0)
+					OR (~%name%~ STRING_COMPARE_CASE "JESTER" == 0)
+					OR (~%name%~ STRING_COMPARE_CASE "SKALD" == 0)
+					//Cleric
+					OR (~%name%~ STRING_COMPARE_CASE "HELM" == 0)
+					OR (~%name%~ STRING_COMPARE_CASE "LATHANDER" == 0)
+					OR (~%name%~ STRING_COMPARE_CASE "TALOS" == 0)
+					BEGIN
+						REMOVE_2DA_ROW row 9
+						--row
+						--total_rows
+						PATCH_PRINT ~Removing Row~
+					END
+			END
+		END
+BUT_ONLY
+*/
+
+/*
+//Bard
+COPY_EXISTING_REGEXP GLOB ~^K_B_.+\.2da$~ ~override~
+	LAUNCH_PATCH_FUNCTION remove_kits INT_VAR smallest = 13 largest = 15 END
+BUT_ONLY
+
+//Cleric
+COPY_EXISTING_REGEXP GLOB ~^K_C_.+\.2da$~ ~override~
+	LAUNCH_PATCH_FUNCTION remove_kits INT_VAR smallest = 20 largest = 21 END
+	LAUNCH_PATCH_FUNCTION remove_kits INT_VAR smallest = 40 largest = 41 END
+BUT_ONLY
+
+//Druid
+COPY_EXISTING_REGEXP GLOB ~^K_D_.+\.2da$~ ~override~
+	LAUNCH_PATCH_FUNCTION remove_kits INT_VAR smallest = 16 largest = 18 END
+BUT_ONLY
+
+//Fighter
+COPY_EXISTING_REGEXP GLOB ~^K_F_.+\.2da$~ ~override~
+	LAUNCH_PATCH_FUNCTION remove_kits INT_VAR smallest = 1 largest = 3 END
+	LAUNCH_PATCH_FUNCTION remove_kits INT_VAR smallest = 34 largest = 34 END
+	LAUNCH_PATCH_FUNCTION remove_kits INT_VAR smallest = 31 largest = 31 END
+BUT_ONLY
+
+//Mage (only remove Wild Mage)
+COPY_EXISTING_REGEXP GLOB ~^K_M_.+\.2da$~ ~override~
+	LAUNCH_PATCH_FUNCTION remove_kits INT_VAR smallest = 30 largest = 30 END
+BUT_ONLY
+
+//Paladin
+COPY_EXISTING_REGEXP GLOB ~^K_P_.+\.2da$~ ~override~
+	LAUNCH_PATCH_FUNCTION remove_kits INT_VAR smallest = 4 largest = 6 END
+	LAUNCH_PATCH_FUNCTION remove_kits INT_VAR smallest = 32 largest = 32 END
+BUT_ONLY
+
+//Ranger
+COPY_EXISTING_REGEXP GLOB ~^K_R_.+\.2da$~ ~override~
+	LAUNCH_PATCH_FUNCTION remove_kits INT_VAR smallest = 7 largest = 9 END
+BUT_ONLY
+
+//Thief
+COPY_EXISTING_REGEXP GLOB ~^K_T_.+\.2da$~ ~override~
+	LAUNCH_PATCH_FUNCTION remove_kits INT_VAR smallest = 10 largest = 12 END
+	LAUNCH_PATCH_FUNCTION remove_kits INT_VAR smallest = 33 largest = 33 END
+BUT_ONLY
+*/
+
+////Remove Classes from all Races
+COPY_EXISTING ~clsrcreq.2da~ ~override~
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "WILDMAGE" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "BARBARIAN" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "BERSERKER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "WIZARD_SLAYER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "KENSAI" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "DWARVEN_DEFENDER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "TALOS" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "HELM" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "LATHANDER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "OHTYR" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "OHTEMPUS" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "ASSASIN" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "BOUNTY_HUNTER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "SWASHBUCKLER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "SHADOWDANCER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "BLADE" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "JESTER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "SKALD" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "CAVALIER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "INQUISITOR" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "UNDEAD_HUNTER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "BLACKGUARD" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "TOTEMIC_DRUID" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "SHAPESHIFTER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "BEAST_FRIEND" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "FERALAN" END //???
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "STALKER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "BEASTMASTER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "SHAMAN" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "SORCERER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "DRAGON_DISCIPLE" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "MONK" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "DARK_MOON" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "SUN_SOUL" END
+BUT_ONLY

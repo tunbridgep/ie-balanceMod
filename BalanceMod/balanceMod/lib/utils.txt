@@ -1,0 +1,32 @@
+DEFINE_PATCH_FUNCTION remove_kits INT_VAR smallest = 99 largest = 99 BEGIN
+	COUNT_2DA_ROWS 2 total_rows
+	FOR (row=0; row < total_rows; ++row)
+		BEGIN
+			READ_2DA_ENTRY row 1 2 num
+			PATCH_IF (IS_AN_INT num) BEGIN
+				PATCH_IF (~%num%~ >= %smallest%)
+					AND (~%num%~ <= %largest%)
+					BEGIN
+						REMOVE_2DA_ROW row 2
+						--row
+						--total_rows
+					END
+			END
+		END
+END
+
+DEFINE_PATCH_FUNCTION disable_class STR_VAR class_name = "none" BEGIN
+	COUNT_2DA_COLS total_cols
+	COUNT_2DA_ROWS total_cols total_rows
+	FOR (row=0; row < total_rows; ++row)
+		BEGIN
+			READ_2DA_ENTRY row 0 total_cols col_class
+			FOR (col=1; col < total_cols; ++col)
+				BEGIN
+					PATCH_IF (~%col_class%~ STRING_EQUAL_CASE ~%class_name%~)
+					BEGIN
+						SET_2DA_ENTRY row col total_cols 0
+					END
+				END
+		END
+END

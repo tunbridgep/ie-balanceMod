@@ -1,0 +1,5 @@
+////Remove Classes
+COPY_EXISTING ~clsrcreq.2da~ ~override~
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "SORCERER" END
+	LAUNCH_PATCH_FUNCTION disable_class STR_VAR class_name = "DRAGON_DISCIPLE" END
+BUT_ONLY
