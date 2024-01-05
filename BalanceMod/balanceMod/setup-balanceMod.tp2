@@ -70,6 +70,10 @@ INCLUDE ~%MOD_FOLDER%/components/bardsongs/install.txt~
 
 ////Disable IWD:EE Extra Kits
 
+//"Main" options
+//BEGIN @1023
+//REQUIRE_PREDICATE NOT MOD_IS_INSTALLED ~%MOD_FOLDER%/components/disableiwdeekits/bard.txt~ ~29~ @24
+
 BEGIN @10231
 GROUP @1023
 REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
