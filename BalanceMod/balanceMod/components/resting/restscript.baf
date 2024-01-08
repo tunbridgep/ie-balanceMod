@@ -2,6 +2,7 @@
 IF
 	Global("balanceMod_RestDisabled","MYAREA",1)
 	PartyHasItem("CAMPSUPP")
+	!AreaType(CITY)
 THEN
 	RESPONSE #100
 		RemoveAreaFlag(NOREST)
@@ -17,6 +18,7 @@ END
 IF
 	!Global("balanceMod_RestDisabled","MYAREA",1)
 	!PartyHasItem("CAMPSUPP")
+	!AreaType(CITY)
 THEN
 	RESPONSE #100
 		AddAreaFlag(NOREST)
@@ -37,7 +39,7 @@ IF
 		AreaType(DUNGEON)
 THEN
 	RESPONSE #100
-		DisplayStringNoName(Myself,~Camping Supplies Used~)
+		DisplayStringNoName(Myself,@101)
 		TakePartyItemNum("CAMPSUPP",1) //DONT use TakePartyItem, it takes an entire stack
 		Continue()
 END

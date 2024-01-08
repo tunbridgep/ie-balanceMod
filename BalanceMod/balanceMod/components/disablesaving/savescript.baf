@@ -3,6 +3,7 @@ IF
 	PartyRested()
 THEN
 	RESPONSE #100
-	SaveGame(0)
+	SaveGame(1)
+	DisplayStringNoName(Myself,@100)
 	Continue()
 END

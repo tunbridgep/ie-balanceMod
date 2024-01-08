@@ -27,8 +27,9 @@ COPY_EXISTING ~UI.MENU~ ~override~
 		clickable lua "canClickSaveGame()"~
 		
 	//Disable quicksave button in UI
-	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~worldScreen:OnQuickSaveButtonClick(true)~ ~nil~
-	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~worldScreen:OnQuickSaveButtonClick(false)~ ~nil~
+	//TODO: Hide it by changing it's enabled property, rather than simply making it do nothing
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~worldScreen:OnQuickSaveButtonClick(true)~ ~~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~worldScreen:OnQuickSaveButtonClick(false)~ ~~
 	
 	//Disable Save button in quit game menu
 	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~'SAVE_BUTTON', function() optionsScreen:SaveGame(0) end,~ ~--'SAVE_BUTTON', function() optionsScreen:SaveGame(0) end,~
