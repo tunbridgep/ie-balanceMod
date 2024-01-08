@@ -12,9 +12,19 @@ README ~%MOD_FOLDER%/%LANGUAGE%/readme.txt~ ~%MOD_FOLDER%/readme.txt~
 LANGUAGE
 	~English~ ~lang/english~ ~%MOD_FOLDER%/lang/english/setup.tra~
 
+//////////////////Core Gameplay Group
+
+////Disable Saving
+
+BEGIN @1019
+GROUP @2020
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/disablesaving/install.txt~
+
 ////Resting Overhaul
 
 BEGIN @1018
+GROUP @2020
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/resting/install.txt~
 
@@ -24,6 +34,7 @@ INCLUDE ~%MOD_FOLDER%/components/resting/install.txt~
 ////Reduce Enemy Gold
 
 BEGIN @10211 //Half
+GROUP @2020
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @1000
 SUBCOMPONENT @1021
 OUTER_SET gold_divide_amount = 2
@@ -31,6 +42,7 @@ OUTER_SET human_only = 0
 INCLUDE ~%MOD_FOLDER%/components/lessgold/install.txt~
 
 BEGIN @10212 //Two Thirds
+GROUP @2020
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @1000
 SUBCOMPONENT @1021
 OUTER_SET gold_divide_amount = 3
@@ -39,6 +51,7 @@ INCLUDE ~%MOD_FOLDER%/components/lessgold/install.txt~
 
 /*
 BEGIN @10213 //Half, Human Only
+GROUP @2020
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @1000
 SUBCOMPONENT @1021
 OUTER_SET gold_divide_amount = 2
@@ -46,6 +59,7 @@ OUTER_SET human_only = 1
 INCLUDE ~%MOD_FOLDER%/components/lessgold/install.txt~
 
 BEGIN @10214 //Two Thirds, Human only
+GROUP @2020
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @1000
 SUBCOMPONENT @1021
 OUTER_SET gold_divide_amount = 3
@@ -53,11 +67,7 @@ OUTER_SET human_only = 1
 INCLUDE ~%MOD_FOLDER%/components/lessgold/install.txt~
 */
 
-////Add IWD Bard Songs
-
-BEGIN @1022
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee~ @1000
-INCLUDE ~%MOD_FOLDER%/components/bardsongs/install.txt~
+//////////////////Disable IWD:EE Extra Kits Group
 
 ////Disable IWD:EE Extra Kits
 
@@ -120,9 +130,10 @@ GROUP @2010
 REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/mage.txt~
 
-////Disable Saving
+//////////////////No Group
 
-BEGIN @1019
-GROUP @2020
-REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @1000
-INCLUDE ~%MOD_FOLDER%/components/disablesaving/install.txt~
+////Add IWD Bard Songs
+
+BEGIN @1022
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/bardsongs/install.txt~
