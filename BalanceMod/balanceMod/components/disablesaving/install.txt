@@ -3,13 +3,43 @@
 /*
 //Disable Saving in Areas
 //DISABLED: This also completely disables resting
-COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
-	WRITE_BYTE 0x14 (THIS | BIT0) // add 'no saving' bit to all alreas
-BUT_ONLY
+//COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
+//	WRITE_BYTE 0x14 (THIS | BIT0) // add 'no saving' bit to all alreas
+//BUT_ONLY
 */
 
 ////Add saving script
-EXTEND_TOP ~baldur.bcs~ ~%MOD_FOLDER%/components/disablesaving/savescript.baf~
+//EXTEND_TOP ~baldur.bcs~ ~%MOD_FOLDER%/components/disablesaving/savescript.baf~
 
 //SetPrivateProfileString('Script','IntervalSaveEnabled','1')
 //SetPrivateProfileString('Script','IntervalSaveCombat','0')
+
+
+//Disable saving by disabling the save button in the menu and the quicksave button on the bar
+COPY_EXISTING ~UI.MENU~ ~override~
+	
+	//Disable menu save button
+	INSERT_FILE 2 ~%MOD_FOLDER%/components/disablesaving/menuscript.lua~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~clickable lua "canClickSaveLoad()"~ ~~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~text "LOAD_GAME_BUTTON"~ ~text "LOAD_GAME_BUTTON"
+		clickable lua "canClickSaveLoad()"~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~text "SAVE_GAME_BUTTON"~ ~text "SAVE_GAME_BUTTON"
+		clickable lua "canClickSaveGame()"~
+		
+	//Disable quicksave button in UI
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~worldScreen:OnQuickSaveButtonClick(true)~ ~nil~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~worldScreen:OnQuickSaveButtonClick(false)~ ~nil~
+	
+	//Disable Save button in quit game menu
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~'SAVE_BUTTON', function() optionsScreen:SaveGame(0) end,~ ~--'SAVE_BUTTON', function() optionsScreen:SaveGame(0) end,~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~popup3Button(16456,~ ~popup2Button(16456,~
+BUT_ONLY
+
+//Remove Quicksave keybinding
+COPY_EXISTING ~BGEE.lua~ ~override~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~{ 29, 3,	'Quick Save',~ ~--{ 29, 3,	'Quick Save',~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~{ 24, 3,	'Quick Load',~ ~--{ 24, 3,	'Quick Load',~
+BUT_ONLY
+
+//Add Save on Rest
+EXTEND_TOP ~baldur.bcs~ ~%MOD_FOLDER%/components/disablesaving/savescript.baf~

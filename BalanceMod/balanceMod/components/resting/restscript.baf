@@ -5,7 +5,7 @@ IF
 THEN
 	RESPONSE #100
 		RemoveAreaFlag(NOREST)
-		DisplayStringNoName(Myself,~Enabling Rest~)
+		//DisplayStringNoName(Myself,~Enabling Rest~)
 		SetGlobal("balanceMod_RestDisabled","MYAREA",0)
 		
 		//Disable Encounters
@@ -20,7 +20,7 @@ IF
 THEN
 	RESPONSE #100
 		AddAreaFlag(NOREST)
-		DisplayStringNoName(Myself,~Disabling Rest~)
+		//DisplayStringNoName(Myself,~Disabling Rest~)
 		SetGlobal("balanceMod_RestDisabled","MYAREA",1)
 		
 		//Disable Encounters

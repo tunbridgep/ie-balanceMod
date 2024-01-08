@@ -15,7 +15,6 @@
 
 @1022	= ~Add Icewind Dale Bard Songs~
 
-@1023	= ~Disable IWD:EE Added Kits and Classes~
 @10231	= ~Disable IWD:EE Added Kits: Bard~
 @10232	= ~Disable IWD:EE Added Kits: Cleric~
 @10233	= ~Disable IWD:EE Added Kits: Druid~
@@ -28,6 +27,9 @@
 @102310	= ~Disable IWD:EE Added Class: Monk~
 @102311	= ~Disable IWD:EE Added Kit: Wild Mage~
 
+//Groups
+@2010	= ~Disable IWD:EE Added Kits and Classes~
+@2020	= ~Core Gameplay Changes~
 
 ////Resting Overhaul
 

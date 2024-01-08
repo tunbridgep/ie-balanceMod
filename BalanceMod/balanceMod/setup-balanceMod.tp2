@@ -10,22 +10,13 @@ END
 README ~%MOD_FOLDER%/%LANGUAGE%/readme.txt~ ~%MOD_FOLDER%/readme.txt~
 
 LANGUAGE
-	~English~
-	~lang/english~
-	~%MOD_FOLDER%/lang/english/setup.tra~
+	~English~ ~lang/english~ ~%MOD_FOLDER%/lang/english/setup.tra~
 
 ////Resting Overhaul
 
 BEGIN @1018
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/resting/install.txt~
-
-////Disable Saving
-
-////CURRENTLY BROKEN
-//BEGIN @1019
-//REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @1000
-//INCLUDE ~%MOD_FOLDER%/components/disablesaving/install.txt~
 
 //BEGIN @1020
 //INCLUDE ~%MOD_FOLDER%/components/townportal/install.txt~
@@ -75,56 +66,63 @@ INCLUDE ~%MOD_FOLDER%/components/bardsongs/install.txt~
 //REQUIRE_PREDICATE NOT MOD_IS_INSTALLED ~%MOD_FOLDER%/components/disableiwdeekits/bard.txt~ ~29~ @24
 
 BEGIN @10231
-GROUP @1023
+GROUP @2010
 REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/bard.txt~
 
 BEGIN @10232
-GROUP @1023
+GROUP @2010
 REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/cleric.txt~
 
 BEGIN @10233
-GROUP @1023
+GROUP @2010
 REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/druid.txt~
 
 BEGIN @10234
-GROUP @1023
+GROUP @2010
 REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/paladin.txt~
 
 BEGIN @10235
-GROUP @1023
+GROUP @2010
 REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/warrior.txt~
 
 BEGIN @10236
-GROUP @1023
+GROUP @2010
 REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/thief.txt~
 
 BEGIN @10237
-GROUP @1023
+GROUP @2010
 REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/ranger.txt~
 
 BEGIN @10238
-GROUP @1023
+GROUP @2010
 REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/sorceror.txt~
 
 BEGIN @10239
-GROUP @1023
+GROUP @2010
 REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/shaman.txt~
 
 BEGIN @102310
-GROUP @1023
+GROUP @2010
 REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/monk.txt~
 
 BEGIN @102311
-GROUP @1023
+GROUP @2010
 REQUIRE_PREDICATE GAME_IS ~iwdee~ @1000
 INCLUDE ~%MOD_FOLDER%/components/disableiwdeekits/mage.txt~
+
+////Disable Saving
+
+BEGIN @1019
+GROUP @2020
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @1000
+INCLUDE ~%MOD_FOLDER%/components/disablesaving/install.txt~
