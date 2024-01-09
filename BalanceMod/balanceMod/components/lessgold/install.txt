@@ -2,20 +2,47 @@
 
 ////Remove Gold from All Creatures
 COPY_EXISTING_REGEXP GLOB ~^.+\.cre$~ ~override~
-	//SET type_offset = 0x271 //Creature Type, called "General" in Near Infinity
-	SET gold_offset = 0x1c //Gold offset
-	SET humanoidID = IDS_OF_SYMBOL ("GENERAL" "humanoid")
-	//SET type = BYTE_AT 0x271
-	
+	SET gold_offset = 0x1c
 	READ_LONG gold_offset gd //Gold
-	PATCH_IF gd > 0
-		BEGIN
+	PATCH_IF gd > 0	BEGIN
+		PATCH_IF gold_divide_amount == 0 BEGIN
+			WRITE_LONG gold_offset 0
+		END ELSE BEGIN
 			WRITE_LONG gold_offset (gd / gold_divide_amount)
 		END
-	//PATCH_IF type != humanoidID AND human_only
-	//	BEGIN
-	//		WRITE_LONG gold_offset 0
-	//	END
+	END
+	
+	//Some creatures have gold (MISC07) in their inventory, so we need to update it
+	//We can't use ADD_CRE_ITEM here since we don't know if a creature actually has gold or not
+	//GET_OFFSET_ARRAY also doesn't seem to actually work
+	READ_LONG 0x02c0 items //total items
+	READ_LONG 0x02bc item_offset //offset to items
+
+	SET items_size = 20 //total size of an item entry
+	FOR (curr=0; curr < items; curr += 1) BEGIN
+		SET curr_item_offset = item_offset + (items_size * curr)
+		READ_ASCII (curr_item_offset + 0x00) item_name
+		READ_SHORT (curr_item_offset + 0x0a) item_quantity
+		READ_SHORT (curr_item_offset + 0x0c) item_quantity2 //???
+		PATCH_IF ~%item_name%~ STRING_EQUAL ~MISC07~ AND item_quantity > 0 BEGIN
+			PATCH_IF gold_divide_amount == 0 BEGIN
+				SET newgold = 0
+			END ELSE BEGIN
+				SET newgold = item_quantity / gold_divide_amount
+				SET newgold2 = item_quantity2 / gold_divide_amount
+			END
+			//PATCH_PRINT ~reducing gold for %SOURCE_FILE% from %item_quantity% to %newgold%~
+			
+			//We can't have gold with quantity 0 in our inventory, it assumes 1
+			//So just remove the item entirely
+			PATCH_IF newgold == 0 BEGIN
+				REMOVE_CRE_ITEM ~MISC07~
+			END ELSE BEGIN
+				WRITE_SHORT (curr_item_offset + 0x0a) newgold
+				WRITE_SHORT (curr_item_offset + 0x0c) newgold2
+			END
+		END
+	END	
 BUT_ONLY
 
 ////Remove Gold from All Containers
@@ -52,7 +79,11 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
 				PATCH_IF ~%item_name%~ STRING_EQUAL ~MISC07~ AND item_quantity > 0
 				BEGIN
 					//PATCH_PRINT ~updating gold value...~
-					WRITE_SHORT (item_offset + 0x0a) (item_quantity / gold_divide_amount)
+					PATCH_IF gold_divide_amount == 0 BEGIN
+						WRITE_SHORT (item_offset + 0x0a) 0
+					END ELSE BEGIN
+						WRITE_SHORT (item_offset + 0x0a) (item_quantity / gold_divide_amount)
+					END
 				END
 			END
 		END
@@ -91,7 +122,11 @@ COPY_EXISTING ~rndtreas.2da~ ~override~
 										END
 									PATCH_IF ~%val%~ STRING_EQUAL ~%prefix%%num%~
 										BEGIN
-											SET newgold = num / gold_divide_amount
+											PATCH_IF gold_divide_amount == 0 BEGIN
+												SET newgold = 0
+											END ELSE BEGIN
+												SET newgold = num * gold_divide_amount
+											END
 											SET_2DA_ENTRY row col 20 ~%prefix%%newgold%~
 										END
 								END
