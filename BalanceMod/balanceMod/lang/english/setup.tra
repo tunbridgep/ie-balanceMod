@@ -3,6 +3,10 @@
 @1001	= ~This component is incompatible with another mod already installed.~
 
 @1018	= ~Resting Overhaul~
+@10181	= ~Camping Supplies cost 100 Gold~
+@10182	= ~Camping Supplies cost 200 Gold~
+@10183	= ~Camping Supplies cost 300 Gold~
+@10184	= ~Camping Supplies cost 400 Gold (Hardcore. Not recommended!)~
 
 @1019	= ~Disable Free Saving~
 

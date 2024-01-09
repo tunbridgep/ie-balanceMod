@@ -30,3 +30,11 @@ DEFINE_PATCH_FUNCTION disable_class STR_VAR class_name = "none" BEGIN
 				END
 		END
 END
+
+DEFINE_ACTION_FUNCTION add_city_flags STR_VAR area = ~~ BEGIN
+	COPY_EXISTING_REGEXP GLOB ~%area%~ ~override~
+		PATCH_PRINT ~Adding City flag to %SOURCE_FILE%~
+		READ_SHORT 0x48 flags
+		WRITE_SHORT 0x48 (flags BOR 0b00001000)
+	BUT_ONLY
+END

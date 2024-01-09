@@ -1,4 +1,5 @@
 //Enable Rest if we have any camping supplies
+//!AreaType(CITY)
 IF
 	Global("balanceMod_RestDisabled","MYAREA",1)
 	PartyHasItem("CAMPSUPP")
@@ -34,9 +35,11 @@ END
 IF
 	PartyRested()
 	//Don't remove if we rest in inns
+	//Cannot check for City here, since inns don't have the city flag
 	OR(2)
 		AreaType(OUTDOOR)
 		AreaType(DUNGEON)
+		AreaType(FOREST)
 THEN
 	RESPONSE #100
 		DisplayStringNoName(Myself,@101)

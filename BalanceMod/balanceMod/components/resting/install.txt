@@ -1,15 +1,5 @@
 /////////////////===== Setup Resting Overhaul =====\\\\\\\\\\\\\\\\\
 
-/*
-////Disable Resting and Saving in Areas
-////DISABLED: This is now done via script
-COPY_EXISTING_REGEXP GLOB ~^.+\.are$~ ~override~
-	WRITE_BYTE 0x14 (THIS | BIT5) // add 'no resting' bit to all alreas
-	WRITE_BYTE 0x14 (THIS | BIT0) // add 'no saving' bit to all alreas
-	//WRITE_BYTE 0x14 (THIS | BIT7) // add 'no resting' bit to all alreas
-BUT_ONLY
-*/
-
 ////Add script to force use of supply items
 EXTEND_TOP ~baldur.bcs~ ~%MOD_FOLDER%/components/resting/restscript.baf~
 
@@ -27,8 +17,7 @@ COPY_EXISTING ~%MOD_FOLDER%/components/resting/CAMPSUPP.ITM~ ~override~
 	SAY NAME2 @26
 	SAY DESC @27
 	SAY UNIDENTIFIED_DESC @27
-    //WRITE_LONG 0x34 150 // set price to 150 gp
-    WRITE_LONG 0x34 200 // set price to 1 gp
+    WRITE_LONG 0x34 camping_cost // set price
 
 ////Add to Stores, Taverns and Inns
 COPY_EXISTING_REGEXP GLOB ~^.+\.sto$~ ~override~
@@ -87,9 +76,17 @@ COPY_EXISTING_REGEXP GLOB ~^.+\.sto$~ ~override~
 			READ_SHORT  0x68 "noblePrice" ELSE 0
 			READ_SHORT  0x6c "royalPrice" ELSE 0
 			READ_SHORT  0x5c "roomFlags" ELSE 0
-			WRITE_LONG 0x60 (peasantPrice * 40) //multiply price
-			WRITE_LONG 0x64 (peasantPrice * 42) //multiply price
-			WRITE_LONG 0x68 (peasantPrice * 44) //multiply price
-			WRITE_LONG 0x6c (peasantPrice * 46) //multiply price
+			WRITE_LONG 0x60 (peasantPrice * inn_mult) //multiply price
+			WRITE_LONG 0x64 (peasantPrice * inn_mult + 2) //multiply price
+			WRITE_LONG 0x68 (peasantPrice * inn_mult + 4) //multiply price
+			WRITE_LONG 0x6c (peasantPrice * inn_mult + 6) //multiply price
 		END
 BUT_ONLY
+
+////Fix city flags for various areas (Kuldahar etc) in Icewind Dale
+ACTION_IF (GAME_IS ~iwdee~) BEGIN
+	LAUNCH_ACTION_FUNCTION add_city_flags STR_VAR area = ~AR1000.ARE~ END
+	LAUNCH_ACTION_FUNCTION add_city_flags STR_VAR area = ~AR2100.ARE~ END
+	LAUNCH_ACTION_FUNCTION add_city_flags STR_VAR area = ~AR9100.ARE~ END
+	LAUNCH_ACTION_FUNCTION add_city_flags STR_VAR area = ~AR9200.ARE~ END
+END
