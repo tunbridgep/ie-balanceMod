@@ -33,7 +33,8 @@ COPY_EXISTING ~UI.MENU~ ~override~
 	
 	//Disable Save button in quit game menu
 	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~'SAVE_BUTTON', function() optionsScreen:SaveGame(0) end,~ ~--'SAVE_BUTTON', function() optionsScreen:SaveGame(0) end,~
-	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~popup3Button(16456,~ ~popup2Button(16456,~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~popup3Button(16456,~ ~popup2Button(16456,~ //IWD
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~popup4Button(16456,~ ~popup3Button(16456,~ //BG
 BUT_ONLY
 
 //Remove Quicksave keybinding

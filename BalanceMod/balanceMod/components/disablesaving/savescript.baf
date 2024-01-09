@@ -7,3 +7,14 @@ THEN
 	DisplayStringNoName(Myself,@100)
 	Continue()
 END
+
+//Save once when we start a new game
+IF
+	Global("balanceMod_StartSave","GLOBAL",0)
+THEN
+	RESPONSE #100
+    SetGlobal("balanceMod_StartSave","GLOBAL",1)
+	SaveGame(1)
+	DisplayStringNoName(Myself,@100)
+	Continue()
+END
