@@ -28,13 +28,17 @@ COPY_EXISTING ~UI.MENU~ ~override~
 		
 	//Disable quicksave button in UI
 	//TODO: Hide it by changing it's enabled property, rather than simply making it do nothing
-	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~worldScreen:OnQuickSaveButtonClick(true)~ ~~
-	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~worldScreen:OnQuickSaveButtonClick(false)~ ~~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~worldScreen:OnQuickSaveButtonClick(true)~ ~onQuicksaveButton()~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~worldScreen:OnQuickSaveButtonClick(false)~ ~onQuicksaveButton()~
+	SET quicksave_message=RESOLVE_STR_REF(@103)
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~@quicksave_message~ ~%quicksave_message%~
 	
 	//Disable Save button in quit game menu
-	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~'SAVE_BUTTON', function() optionsScreen:SaveGame(0) end,~ ~--'SAVE_BUTTON', function() optionsScreen:SaveGame(0) end,~
-	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~popup3Button(16456,~ ~popup2Button(16456,~ //IWD
-	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~popup4Button(16456,~ ~popup3Button(16456,~ //BG
+    PATCH_IF disable_quit_save BEGIN
+        REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~'SAVE_BUTTON', function() optionsScreen:SaveGame(0) end,~ ~--'SAVE_BUTTON', function() optionsScreen:SaveGame(0) end,~
+        REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~popup3Button(16456,~ ~popup2Button(16456,~ //IWD
+        REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~popup4Button(16456,~ ~popup3Button(16456,~ //BG
+    END
 BUT_ONLY
 
 //Remove Quicksave keybinding

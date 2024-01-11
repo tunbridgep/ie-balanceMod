@@ -16,9 +16,20 @@ LANGUAGE
 
 ////Disable Saving
 
-BEGIN @1019
+//Allow exit saves
+BEGIN @10191
 GROUP @2020
+SUBCOMPONENT @1019
 REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @1000
+OUTER_SET disable_quit_save = 0
+INCLUDE ~%MOD_FOLDER%/components/disablesaving/install.txt~
+
+//Disallow exit saves
+BEGIN @10192
+GROUP @2020
+SUBCOMPONENT @1019
+REQUIRE_PREDICATE GAME_IS ~bgee bg2ee iwdee~ @1000
+OUTER_SET disable_quit_save = 1
 INCLUDE ~%MOD_FOLDER%/components/disablesaving/install.txt~
 
 ////Resting Overhaul

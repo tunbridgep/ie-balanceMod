@@ -9,6 +9,8 @@
 @10184	= ~Camping Supplies cost 400 Gold (Hardcore. Not recommended!)~
 
 @1019	= ~Disable Free Saving~
+@10191	= ~Allow Exit Saving~
+@10192	= ~Disable Exit Saving~
 
 @1020	= ~Town Portal Spell~
 
@@ -39,8 +41,10 @@
 
 ////In-Game Text
 
-@100	= ~^RGame Saved!~
-@101	= ~^GThe party is able to rest comfortably using camping supplies...~
+@100	= ~^GGame Saved!~
+@101	= ~^$The party is able to rest comfortably using camping supplies...~
+@102	= ~^RYou lack enough camping supplies to rest here~
+@103	= ~^RSaving is disabled~
 
 ////Resting Overhaul
 
