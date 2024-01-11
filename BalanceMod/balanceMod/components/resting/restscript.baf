@@ -1,48 +1,90 @@
-//Enable Rest if we have any camping supplies
-//!AreaType(CITY)
+//We only care about disabling resting when outdoors and in dungeons
+//Everywhere else, it's already handled
 IF
-	Global("balanceMod_RestDisabled","MYAREA",1)
-	PartyHasItem("CAMPSUPP")
-	!AreaType(CITY)
+    OnCreation()
 THEN
 	RESPONSE #100
-		RemoveAreaFlag(NOREST)
-		//DisplayStringNoName(Myself,~Enabling Rest~)
-		SetGlobal("balanceMod_RestDisabled","MYAREA",0)
-		
-		//Disable Encounters
-		//SetRestEncounterProbabilityDay(0)
-		//SetRestEncounterProbabilityNight(0)
+		DisplayStringNoName(Myself,~Game Start, setting token~)
+		SetTokenGlobal("balanceMod_RestEnabled","GLOBAL","REST_ENABLED")
+END
+
+//We only care about disabling resting when outdoors and in dungeons
+//Everywhere else, it's already handled
+IF
+	Global("balanceMod_ManagedRest","GLOBAL",0)
+	//!AreaType(CITY)
+    OR(2)
+        AreaType(OUTDOOR)
+	    AreaType(DUNGEON)
+THEN
+	RESPONSE #100
+		//DisplayStringNoName(Myself,~Area is valid, setting managed rest mode~)
+		SetGlobal("balanceMod_ManagedRest","GLOBAL",1)
+		Continue()
+END
+
+IF
+	Global("balanceMod_ManagedRest","GLOBAL",1)
+    !AreaType(OUTDOOR)
+	!AreaType(DUNGEON)
+THEN
+	RESPONSE #100
+		//DisplayStringNoName(Myself,~Area is invalid, unsetting managed rest mode~)
+		SetGlobal("balanceMod_ManagedRest","GLOBAL",0)
+		Continue()
 END
 
 //Disable Rest if we don't have any camping supplies
 IF
-	!Global("balanceMod_RestDisabled","MYAREA",1)
 	!PartyHasItem("CAMPSUPP")
-	!AreaType(CITY)
+    Global("balanceMod_RestEnabled","GLOBAL",1)
+    Global("balanceMod_ManagedRest","GLOBAL",1)
 THEN
 	RESPONSE #100
-		AddAreaFlag(NOREST)
-		//DisplayStringNoName(Myself,~Disabling Rest~)
-		SetGlobal("balanceMod_RestDisabled","MYAREA",1)
-		
-		//Disable Encounters
-		//SetRestEncounterProbabilityDay(0)
-		//SetRestEncounterProbabilityNight(0)
+		//DisplayStringNoName(Myself,~Area is managed, disabling rest~)
+		SetGlobal("balanceMod_RestEnabled","GLOBAL",0)
+		SetTokenGlobal("balanceMod_RestEnabled","GLOBAL","REST_ENABLED")
+		Continue()
+END
+
+//Enable Rest if we have any camping supplies or the area is unmanaged
+IF
+    Global("balanceMod_RestEnabled","GLOBAL",0)
+    OR(2)
+        PartyHasItem("CAMPSUPP")
+        Global("balanceMod_ManagedRest","GLOBAL",0)
+THEN
+	RESPONSE #100
+		//DisplayStringNoName(Myself,~Area is invalid, or we have camping supplies, enabling rest~)
+		SetGlobal("balanceMod_RestEnabled","GLOBAL",1)
+		SetTokenGlobal("balanceMod_RestEnabled","GLOBAL","REST_ENABLED")
+		Continue()
 END
 
 //Remove camping supplies when we rest
 IF
 	PartyRested()
 	//Don't remove if we rest in inns
-	//Cannot check for City here, since inns don't have the city flag
-	OR(2)
-		AreaType(OUTDOOR)
-		AreaType(DUNGEON)
-		AreaType(FOREST)
+    Global("balanceMod_ManagedRest","GLOBAL",1)
+	Global("balanceMod_StartSave","GLOBAL",0)
 THEN
 	RESPONSE #100
 		DisplayStringNoName(Myself,@101)
 		TakePartyItemNum("CAMPSUPP",1) //DONT use TakePartyItem, it takes an entire stack
+		Continue()
+END
+
+//Remove camping supplies when we rest (save version)
+IF
+	PartyRested()
+	//Don't remove if we rest in inns
+    Global("balanceMod_ManagedRest","GLOBAL",1)
+	Global("balanceMod_StartSave","GLOBAL",1)
+THEN
+	RESPONSE #100
+		DisplayStringNoName(Myself,@101)
+		TakePartyItemNum("CAMPSUPP",1) //DONT use TakePartyItem, it takes an entire stack
+	    SaveGame(1)
+    	DisplayStringNoName(Myself,@100)
 		Continue()
 END

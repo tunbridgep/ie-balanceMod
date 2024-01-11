@@ -90,3 +90,13 @@ ACTION_IF (GAME_IS ~iwdee~) BEGIN
 	LAUNCH_ACTION_FUNCTION add_city_flags STR_VAR area = ~AR9100.ARE~ END
 	LAUNCH_ACTION_FUNCTION add_city_flags STR_VAR area = ~AR9200.ARE~ END
 END
+
+//Add a "You cannot rest without camping supplies" message when using the rest button
+COPY_EXISTING ~UI.MENU~ ~override~
+	SET rest_message=RESOLVE_STR_REF(@102)
+	SET rest_enabled=RESOLVE_STR_REF("<REST_ENABLED>")
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~e:GetActiveEngine():OnRestButtonClick()~ ~sargeRestButtonClicked()~
+	INSERT_FILE 2 ~%MOD_FOLDER%/components/resting/rest.lua~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~@rest_message~ ~%rest_message%~
+	REPLACE_TEXTUALLY CASE_INSENSITIVE EVALUATE_REGEXP ~@rest_enabled~ ~%rest_enabled%~
+BUT_ONLY
