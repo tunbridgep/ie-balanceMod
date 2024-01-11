@@ -4,7 +4,7 @@ IF
     OnCreation()
 THEN
 	RESPONSE #100
-		DisplayStringNoName(Myself,~Game Start, setting token~)
+		//DisplayStringNoName(Myself,~Game Start, setting token~)
 		SetTokenGlobal("balanceMod_RestEnabled","GLOBAL","REST_ENABLED")
 END
 
