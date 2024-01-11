@@ -1,0 +1,10 @@
+Things to implement:
+- Menu's from BG into IWD, such as the beautiful difficulty select menu, the bigger colour picker, the scripts with menu options, and the "Current" and "New" window that shows when selecting an item
+    - Also port over "Records" screen from BG
+- Add rumors system from BG into IWD
+- "Protagonist Mode" for IWD. When protagonist dies, it's game over. Start with 1 party member, but can recruit multiple at Kuldahar and Easthaven.
+- Add "Steal" button from BG shopkeeper menu to IWD.
+- Proper fatigue for IWD
+- Proper morale for IWD
+- Remove "tutorial" monks from Canclekeep (SCS idea)
+- Add in some AI cheese removal and some AI oversight fixes
